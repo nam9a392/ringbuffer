@@ -1,0 +1,10 @@
+###################### ringbuffer referrence #######################
+https://trishagee.com/2011/06/22/dissecting_the_disruptor_whats_so_special_about_a_ring_buffer/
+https://trishagee.com/2011/08/30/disruptor_20__all_change_please/
+https://embeddedartistry.com/blog/2017/05/17/creating-a-circular-buffer-in-c-and-c/
+https://github.com/embeddedartistry/embedded-resources/blob/master/examples/c/circular_buffer/circular_buffer.c
+https://pkg.go.dev/container/ring
+https://github.com/fefa4ka/linked_ring
+
+###################### state machine referrence #######################
+https://www.embedded.com/software-design-of-state-machines/
