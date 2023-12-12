@@ -8,3 +8,7 @@ https://github.com/fefa4ka/linked_ring
 
 ###################### state machine referrence #######################
 https://www.embedded.com/software-design-of-state-machines/
+
+
+###################### cmd patern referrence #######################
+https://www.reddit.com/r/embedded/comments/s71hd7/uart_command_processor_best_approach/

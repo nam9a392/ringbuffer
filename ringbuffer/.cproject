@@ -57,6 +57,7 @@
 							<tool id="com.renesas.cdt.managedbuild.gcc.rx.tool.compilerC.1625598073" name="Compiler" superClass="com.renesas.cdt.managedbuild.gcc.rx.tool.compilerC">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.managedbuild.gcc.core.option.compiler.includes.includeFileDir.2111177078" name="Include file directories (-I)" superClass="com.renesas.cdt.managedbuild.gcc.core.option.compiler.includes.includeFileDir" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/smc_gen/r_config}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/test}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/app}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/common}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/drivers}&quot;"/>
@@ -89,6 +90,38 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="com.renesas.cdt.managedbuild.gcc.rx.option.linker.archives.archiveSearchDirectories.1865825759" name="Standard archive search directories (-L)" superClass="com.renesas.cdt.managedbuild.gcc.rx.option.linker.archives.archiveSearchDirectories" useByScannerDiscovery="false" valueType="stringList"/>
 								<option id="com.renesas.cdt.managedbuild.gcc.core.option.linker.misc.inputsections.491161875" name="Enable garbage collection of unused input sections(-gc-sections)" superClass="com.renesas.cdt.managedbuild.gcc.core.option.linker.misc.inputsections" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.managedbuild.gcc.core.option.linker.source.linkOrderList.1376748578" name="Linkage Order List" superClass="com.renesas.cdt.managedbuild.gcc.core.option.linker.source.linkOrderList" valueType="stringList">
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_pincfg/Pin.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/rx660/mcu_clocks.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/rx660/mcu_init.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/rx660/mcu_interrupts.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/rx660/mcu_mapped_interrupts.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/rx660/vecttbl.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/dbsct.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/lowlvl.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/lowsrc.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/mcu_locks.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_bsp_common.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_bsp_cpu.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_bsp_interrupts.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_bsp_locking.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_bsp_mcu_startup.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_bsp_software_interrupt.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/r_rx_intrinsic_functions.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/reset_program.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/resetprg.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/mcu/all/sbrk.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/r_bsp/board/generic_rx660/hwsetup.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/general/r_cg_hardware_setup.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/general/r_smc_cgc.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/general/r_smc_cgc_user.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/general/r_smc_interrupt.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/Config_SCI0/Config_SCI0.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/smc_gen/Config_SCI0/Config_SCI0_user.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/common/ringbuffer.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/app/communication.o&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;src/ringbuffer.o&quot;"/>
+								</option>
 							</tool>
 							<tool id="com.renesas.cdt.managedbuild.gcc.rx.tool.cpp.linker.1208654557" name="Linker CPP" superClass="com.renesas.cdt.managedbuild.gcc.rx.tool.cpp.linker">
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.renesas.cdt.managedbuild.gcc.core.option.linker.source.linkerScript.552267914" name="Linker script" superClass="com.renesas.cdt.managedbuild.gcc.core.option.linker.source.linkerScript" useByScannerDiscovery="false" valueType="stringList">
@@ -105,7 +138,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH" kind="sourcePath" name="src"/>
+						<entry excluding="ringbuffer.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="src"/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>

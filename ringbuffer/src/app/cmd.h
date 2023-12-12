@@ -1,14 +1,12 @@
 /*
- * ringbuffer.h
+ * cmd.h
  *
- *  Created on: Dec 4, 2023
+ *  Created on: Dec 12, 2023
  *      Author: ADMIN
  */
 
-#ifndef COMMON_RINGBUFFER_H_
-#define COMMON_RINGBUFFER_H_
-
-
+#ifndef APP_CMD_H_
+#define APP_CMD_H_
 /*==================================================================================================
 *                                        INCLUDE FILES
 * 1) system and project includes
@@ -16,73 +14,91 @@
 * 3) internal and external interfaces from this unit
 ==================================================================================================*/
 #include <stdint.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
+
 /*==================================================================================================
                                        DEFINES AND MACROS
 ==================================================================================================*/
-///**
-// * @brief Std_Return_Type
-// */
-typedef enum
-{
-	E_OK = 0U,
-	E_NOT_OK = 1U
-} Std_Return_Type;
-
-
-/*==================================================================================================
-                                           CONSTANTS
-==================================================================================================*/
-
-/*==================================================================================================
-*                                              ENUMS
-==================================================================================================*/
-//typedef enum{
-//	E_OK      = 0,
-//	E_NOT_OK  = 1
-//}rb_ret_e;
-
-typedef enum{
-	OVERLAPPING   = 0,
-	DISCARD      = 1
-}rb_type_e;
-
-typedef struct{
-    uint8_t    *buff;
-    uint16_t   buff_size;
-    uint8_t    elem_size;
-    uint16_t   tail_idx; // index of the next empty slot
-    uint16_t   head_idx; // index of the oldest element
-    rb_type_e  type;
-    uint8_t    full;
-//    uint16_t   n_elem;
-//    uint16_t   max_elem;
-}RingBuffer_t;
-
-
-typedef struct{
-    uint16_t head;
-    uint16_t tail;
-}rb_queue_obj_t;
+// Function signature for a command handler function.
+typedef void (*cmd_func)(const void *);
 
 /*==================================================================================================
 *                                  STRUCTURES AND OTHER TYPEDEFS
 ==================================================================================================*/
+typedef enum{
+	TEXT_DISPLAY,
+	CURSOR_MOVE,
+	IMAGE_CMD
+} display_cmd_e;
+
+typedef enum{
+	LED,
+	BUZZ
+} alarm_cmd_e;
+
+typedef enum{
+	DISPLAY_CMD,
+	ALARM_CMD
+} cmd_e;
+
+typedef enum {
+    STATE_EVENT_TIMEOUT,
+    STATE_EVENT_LINE,
+    STATE_EVENT_ENEMY,
+    STATE_EVENT_FINISHED,
+    STATE_EVENT_COMMAND,
+    STATE_EVENT_NONE
+} cmd_event_e;
+
+// comand line interface (cli)
+// Information about a single command, provided by the client.
+typedef struct {
+	cmd_e      cmd;         // Command type
+	const cmd_func func;    // Command function
+} cli_cmd_t;
+
+// Information provided by the client.
+// - Command base name
+// - Command set info.
+
+struct cmd_client_info {
+    const cmd_e   cmd;               // Client name (first command line token)
+    const uint8_t num_cmds;          // Number of commands.
+    const cli_cmd_t* const cmds; // Pointer to array of command info
+};
+/*==================================================================================================
+*                                              ENUMS
+==================================================================================================*/
+
+/*==================================================================================================
+                                           CONSTANTS
+==================================================================================================*/
+//example cmd function
+
+uint8_t foo1(void)
+{
+
+}
+void    foo2(void)
+{
+
+}
+
+cli_cmd_t cmds[]={
+	{DISPLAY_CMD, foo1},
+	{ALARM_CMD, foo2}
+};
+
 
 /*==================================================================================================
 *                                  GLOBAL VARIABLE DECLARATIONS
 ==================================================================================================*/
 
 /*==================================================================================================
-*                                       FUNCTION PROTOTYPES
+*                                       FUNCTION API
 ==================================================================================================*/
-uint8_t RingBuffer_isFull(RingBuffer_t *rb);
-uint8_t RingBuffer_isEmpty(RingBuffer_t *rb);
-void RingBufferInit(RingBuffer_t *rb, uint8_t *RingArray, uint16_t RingArrayLength);
-void RingBuffer_put(RingBuffer_t *rb,void *pData);
-void RingBuffer_get(RingBuffer_t *rb,void *pData);
+
+void cmd_init(void);
+void cmd_execute(void);
 
 
-#endif /* COMMON_RINGBUFFER_H_ */
+#endif /* APP_CMD_H_ */

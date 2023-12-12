@@ -48,17 +48,38 @@
 /*==================================================================================================
 *                                       FUNCTION PROTOTYPES
 ==================================================================================================*/
-
+static inline void advance_pointer(RingBuffer_t *rb);
+static inline void retreat_pointer(RingBuffer_t *rb);
 /*==================================================================================================
 *                                         LOCAL FUNCTIONS
 ==================================================================================================*/
-static void advance_pointer(RingBuffer_t *rb)
+static inline void advance_pointer(RingBuffer_t *rb)
 {
 	//assert input
 
-	if(rb->full)
+	if(BUFFER_FULL == RingBuffer_isFull(rb))
 	{
-
+		retreat_pointer(rb);
+	}
+	rb->head_idx++;
+	if(rb->head_idx == rb->buff_size)
+	{
+		rb->head_idx = 0;
+	}
+	if(rb->head_idx == rb->tail_idx)
+	{
+		rb->full = BUFFER_FULL;
+	}
+}
+static inline void retreat_pointer(RingBuffer_t *rb)
+{
+	rb->tail_idx++;
+	if(rb->tail_idx == rb->buff_size){
+		rb->tail_idx = 0;
+	}
+	if(BUFFER_FULL == rb->full)
+	{
+		rb->full = BUFFER_NOT_FULL;
 	}
 }
 /*==================================================================================================
@@ -67,11 +88,11 @@ static void advance_pointer(RingBuffer_t *rb)
 
 uint8_t RingBuffer_isFull(RingBuffer_t *rb)
 {
-    return rb->full;
+    return rb->full ? BUFFER_FULL : BUFFER_NOT_FULL;
 }
 uint8_t RingBuffer_isEmpty(RingBuffer_t *rb)
 {
-    return !rb->full && (rb->head_idx == rb->tail_idx);
+    return (!rb->full && (rb->head_idx == rb->tail_idx)) ? BUFFER_EMPTY : BUFFER_NOT_EMPTY;
 }
 
 void RingBufferInit(RingBuffer_t *rb, uint8_t *RingArray, uint16_t RingArrayLength)
@@ -87,40 +108,26 @@ void RingBufferInit(RingBuffer_t *rb, uint8_t *RingArray, uint16_t RingArrayLeng
 void RingBuffer_put(RingBuffer_t *rb,void *pData)
 {
 	// ring buffer full check;
+	// If the buffer is full, the oldest value will be overwritten
 	if(BUFFER_FULL == RingBuffer_isFull(rb))
     {
-
+		retreat_pointer(rb);
     }
-	memcpy(rb->buff[rb->head_idx * rb->elem_size], pData, rb->elem_size);
-    rb->head_idx++;
-    if(rb->head_idx == rb->buff_size)
-    {
-    	rb->head_idx = 0;
-    }
-    if(rb->head_idx == rb->tail_idx)
-    {
-    	rb->full = BUFFER_FULL;
-    }
+	memcpy(&rb->buff[rb->head_idx * rb->elem_size], pData, rb->elem_size);
+	advance_pointer(rb);
 }
 void RingBuffer_get(RingBuffer_t *rb,void *pData)
 {
-	if(pData)
+	if((pData) && (BUFFER_NOT_EMPTY == RingBuffer_isEmpty(rb)))
 	{
 		memcpy(pData, &rb->buff[rb->tail_idx * rb->elem_size], rb->elem_size);
 	}
-	rb->tail_idx++;
-	if(rb->tail_idx == rb->buff_size){
-		rb->tail_idx = 0;
-	}
-	if(rb->full)
-	{
-		rb->full = BUFFER_NOT_FULL;
-	}
+	retreat_pointer(rb);
 }
 
 uint8_t RingBuffer_count(RingBuffer_t *rb)
 {
-	if(rb->full)
+	if(BUFFER_FULL == RingBuffer_isFull(rb))
 	{
 		return rb->buff_size;
 	}else if(rb->tail_idx <= rb->head_idx){
