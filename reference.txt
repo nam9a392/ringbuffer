@@ -6,6 +6,7 @@ https://github.com/embeddedartistry/embedded-resources/blob/master/examples/c/ci
 https://pkg.go.dev/container/ring
 https://github.com/fefa4ka/linked_ring
 
+###################### Lock Free Bipartite Buffer ##################
 ###################### state machine referrence #######################
 https://www.embedded.com/software-design-of-state-machines/
 

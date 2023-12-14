@@ -39,11 +39,6 @@ typedef enum
 /*==================================================================================================
 *                                              ENUMS
 ==================================================================================================*/
-//typedef enum{
-//	E_OK      = 0,
-//	E_NOT_OK  = 1
-//}rb_ret_e;
-
 typedef enum{
 	OVERLAPPING   = 0,
 	DISCARD      = 1
@@ -56,7 +51,7 @@ typedef struct{
     uint16_t   tail_idx; // index of the next empty slot
     uint16_t   head_idx; // index of the oldest element
     rb_type_e  type;
-    uint8_t    full;
+    uint8_t    is_full;
 //    uint16_t   n_elem;
 //    uint16_t   max_elem;
 }RingBuffer_t;
